@@ -1,0 +1,34 @@
+{
+  "name": "nberces/coerce",
+  "type": "library",
+  "description": "A utility class that straddles the line between validation and sanitization.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Nicolas Berces",
+      "email": "hello@nberces.dev"
+    }
+  ],
+  "config": {
+    "sort-packages": true
+  },
+  "require": {
+    "php": "^7.1",
+    "symfony/options-resolver": "^4.0"
+  },
+  "require-dev": {
+    "nberces/php-cs-fixer-config": "^1.00",
+    "phpunit/phpunit": "^8.0",
+    "squizlabs/php_codesniffer": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "NBerces\\Coerce\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "NBerces\\CoerceTests\\": "tests/"
+    }
+  }
+}
