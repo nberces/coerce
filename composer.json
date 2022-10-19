@@ -13,12 +13,12 @@
     "sort-packages": true
   },
   "require": {
-    "php": "^7.1",
+    "php": ">=7.1",
     "symfony/options-resolver": "^4.0|^5.0"
   },
   "require-dev": {
-    "nberces/php-cs-fixer-config": "^1.00",
-    "phpunit/phpunit": "^8.0",
+    "friendsofphp/php-cs-fixer": "^3.0",
+    "phpunit/phpunit": "^9.0",
     "squizlabs/php_codesniffer": "dev-master"
   },
   "autoload": {

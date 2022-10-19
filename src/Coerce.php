@@ -6,6 +6,13 @@ use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
 use DateTimeZone;
+use InvalidArgumentException;
+use Symfony\Component\OptionsResolver\Exception\AccessException;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
+use Symfony\Component\OptionsResolver\Exception\NoSuchOptionException;
+use Symfony\Component\OptionsResolver\Exception\OptionDefinitionException;
+use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Throwable;
@@ -52,8 +59,24 @@ class Coerce
     public static function toBool($variable, array $options = [])
     {
         $resolver = new OptionsResolver();
-        static::configureToBooleanOptionsResolver($resolver);
-        $options = $resolver->resolve($options);
+
+        try {
+            static::configureToBooleanOptionsResolver($resolver);
+
+            $options = $resolver->resolve($options);
+        } catch (AccessException
+        |InvalidOptionsException
+        |MissingOptionsException
+        |NoSuchOptionException
+        |OptionDefinitionException
+        |UndefinedOptionsException $exception
+        ) {
+            throw new InvalidArgumentException(
+                $exception->getMessage(),
+                0,
+                $exception
+            );
+        }
 
         if (is_bool($variable)) {
             return $variable;
@@ -132,8 +155,24 @@ class Coerce
     public static function toDateTime($variable, array $options = [])
     {
         $resolver = new OptionsResolver();
-        static::configureToDateTimeOptionsResolver($resolver);
-        $options = $resolver->resolve($options);
+
+        try {
+            static::configureToDateTimeOptionsResolver($resolver);
+
+            $options = $resolver->resolve($options);
+        } catch (AccessException
+        |InvalidOptionsException
+        |MissingOptionsException
+        |NoSuchOptionException
+        |OptionDefinitionException
+        |UndefinedOptionsException $exception
+        ) {
+            throw new InvalidArgumentException(
+                $exception->getMessage(),
+                0,
+                $exception
+            );
+        }
 
         if ($variable instanceof DateTimeInterface) {
             if (is_null($options['immutable'])) {
@@ -210,8 +249,24 @@ class Coerce
     public static function toEmailAddress($variable, array $options = [])
     {
         $resolver = new OptionsResolver();
-        static::configureToEmailAddressOptionsResolver($resolver);
-        $options = $resolver->resolve($options);
+
+        try {
+            static::configureToEmailAddressOptionsResolver($resolver);
+
+            $options = $resolver->resolve($options);
+        } catch (AccessException
+        |InvalidOptionsException
+        |MissingOptionsException
+        |NoSuchOptionException
+        |OptionDefinitionException
+        |UndefinedOptionsException $exception
+        ) {
+            throw new InvalidArgumentException(
+                $exception->getMessage(),
+                0,
+                $exception
+            );
+        }
 
         $variable = static::toString(
             $variable,
@@ -260,8 +315,24 @@ class Coerce
     public static function toFloat($variable, array $options = [])
     {
         $resolver = new OptionsResolver();
-        static::configureToFloatOptionsResolver($resolver);
-        $options = $resolver->resolve($options);
+
+        try {
+            static::configureToFloatOptionsResolver($resolver);
+
+            $options = $resolver->resolve($options);
+        } catch (AccessException
+        |InvalidOptionsException
+        |MissingOptionsException
+        |NoSuchOptionException
+        |OptionDefinitionException
+        |UndefinedOptionsException $exception
+        ) {
+            throw new InvalidArgumentException(
+                $exception->getMessage(),
+                0,
+                $exception
+            );
+        }
 
         if (is_string($variable)) {
             $variable = trim($variable);
@@ -366,8 +437,25 @@ class Coerce
     public static function toPlainText($variable, array $options = [])
     {
         $resolver = new OptionsResolver();
-        static::configureToPlainTextOptionsResolver($resolver);
-        $options = $resolver->resolve($options);
+
+        try {
+            static::configureToPlainTextOptionsResolver($resolver);
+
+            $options = $resolver->resolve($options);
+        } catch (AccessException
+        |InvalidOptionsException
+        |MissingOptionsException
+        |NoSuchOptionException
+        |OptionDefinitionException
+        |UndefinedOptionsException $exception
+        ) {
+            throw new InvalidArgumentException(
+                $exception->getMessage(),
+                0,
+                $exception
+            );
+        }
+
         $variable = static::toString($variable, ['default' => '']);
 
         if (!empty($variable)) {
@@ -450,8 +538,24 @@ class Coerce
     public static function toString($variable, array $options = [])
     {
         $resolver = new OptionsResolver();
-        static::configureToStringOptionsResolver($resolver);
-        $options = $resolver->resolve($options);
+
+        try {
+            static::configureToStringOptionsResolver($resolver);
+
+            $options = $resolver->resolve($options);
+        } catch (AccessException
+        |InvalidOptionsException
+        |MissingOptionsException
+        |NoSuchOptionException
+        |OptionDefinitionException
+        |UndefinedOptionsException $exception
+        ) {
+            throw new InvalidArgumentException(
+                $exception->getMessage(),
+                0,
+                $exception
+            );
+        }
 
         if (is_numeric($variable)
             ||
@@ -509,6 +613,7 @@ class Coerce
      * (if not all) coersions.
      *
      * @param OptionsResolver $resolver
+     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
      */
     protected static function configureCommonOptions(
         OptionsResolver $resolver
@@ -524,6 +629,7 @@ class Coerce
      * Configures the given resolver to handle options for `self::toBool()`.
      *
      * @param OptionsResolver $resolver
+     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
      * @see Coerce::toBool()
      */
     protected static function configureToBooleanOptionsResolver(
@@ -536,6 +642,7 @@ class Coerce
      * Configures the given resolver to handle options for `self::toDateTime()`.
      *
      * @param OptionsResolver $resolver
+     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
      * @see Coerce::toDateTime()
      */
     protected static function configureToDateTimeOptionsResolver(
@@ -556,10 +663,8 @@ class Coerce
         $resolver->setNormalizer(
             'tz',
             function (Options $options, $value) {
-                if (!is_null($value)) {
-                    if (is_string($value)) {
-                        $value = new DateTimeZone($value);
-                    }
+                if (is_string($value)) {
+                    $value = new DateTimeZone($value);
                 }
 
                 return $value;
@@ -571,6 +676,7 @@ class Coerce
      * Configures the given resolver to handle options for `self::toEmailAddress()`.
      *
      * @param OptionsResolver $resolver
+     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
      * @see Coerce::toEmailAddress()
      */
     protected static function configureToEmailAddressOptionsResolver(
@@ -583,6 +689,7 @@ class Coerce
      * Configures the given resolver to handle options for `self::toFloat()`.
      *
      * @param OptionsResolver $resolver
+     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
      * @see Coerce::toFloat()
      */
     protected static function configureToFloatOptionsResolver(
@@ -607,6 +714,7 @@ class Coerce
      * Configures the given resolver to handle options for `self::toPlainText()`.
      *
      * @param OptionsResolver $resolver
+     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
      * @see Coerce::toPlainText()
      */
     protected static function configureToPlainTextOptionsResolver(
@@ -631,6 +739,7 @@ class Coerce
      * Configures the given resolver to handle options for `self::toString()`.
      *
      * @param OptionsResolver $resolver
+     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
      * @see Coerce::toString()
      */
     protected static function configureToStringOptionsResolver(
