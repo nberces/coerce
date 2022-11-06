@@ -526,6 +526,9 @@ class Coerce
      * number of characters in length. If coersion results in a `string` greater
      * than this number of characters in length, truncate the resulting `string`.
      * This option accepts an `int`.
+     * - **stripWhitespace**: Remove all whitespace characters from the
+     * resulting `string`. This option accepts `true`
+     * or `false`. **Default**: `false`.
      * - **trimWhitespace**: Remove leading and trailing whitespace
      * characters from the resulting `string`. This option accepts `true`
      * or `false`. **Default**: `false`.
@@ -574,6 +577,10 @@ class Coerce
         if (!empty($variable)) {
             if ($options['compactWhitespace']) {
                 $variable = preg_replace('/\s+/', ' ', $variable);
+            }
+
+            if ($options['stripWhitespace']) {
+                $variable = preg_replace('/\s+/', '', $variable);
             }
 
             if ($options['trimWhitespace']) {
@@ -752,6 +759,7 @@ class Coerce
                 'allowBlank' => true,
                 'compactWhitespace' => false,
                 'maxLength' => null,
+                'stripWhitespace' => false,
                 'trimWhitespace' => false
             ]
         );
@@ -759,6 +767,7 @@ class Coerce
         $resolver->setAllowedTypes('allowBlank', 'boolean');
         $resolver->setAllowedTypes('compactWhitespace', 'boolean');
         $resolver->setAllowedTypes('maxLength', ['null', 'int']);
+        $resolver->setAllowedTypes('stripWhitespace', 'boolean');
         $resolver->setAllowedTypes('trimWhitespace', 'boolean');
     }
 }

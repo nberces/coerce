@@ -536,7 +536,7 @@ class CoerceTest extends TestCase
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
             ],
             [
-            '  <p>Lorem ipsum &nbsp; dolor sit amet,  </p><p><i>consectetur</i>&nbsp;adipiscing elit. ',
+                '  <p>Lorem ipsum &nbsp; dolor sit amet,  </p><p><i>consectetur</i>&nbsp;adipiscing elit. ',
                 "Lorem ipsum dolor sit amet,\n\nconsectetur adipiscing elit."
             ],
             [
@@ -611,6 +611,26 @@ class CoerceTest extends TestCase
             ['  f  o o ', 6, ' f o o', ['compactWhitespace' => true]],
             ['  foo', 2, 'fo', ['trimWhitespace' => true]],
             ['  f  o o  ', 4, 'f o', ['compactWhitespace' => true, 'trimWhitespace' => true]]
+        ];
+    }
+
+    public function provideCoercesToStringUsingStripWhitespaceOptionData()
+    {
+        return [
+            ['', true, null],
+            ['', false, ''],
+            ['  ', true, null],
+            ['  ', false, '  '],
+            [
+                "Lorem   ipsum dolor  \t  sit amet\n, consectetur\n\nadipiscing elit.",
+                true,
+                'Loremipsumdolorsitamet,consecteturadipiscingelit.',
+            ],
+            [
+                ' Lorem ipsum dolor  sit amet, consectetur adipiscing elit. ',
+                true,
+                'Loremipsumdolorsitamet,consecteturadipiscingelit.'
+            ]
         ];
     }
 
@@ -1075,6 +1095,33 @@ class CoerceTest extends TestCase
                     $additionalOptions,
                     [
                         'maxLength' => $maxLengthOptionValue
+                    ]
+                )
+            )
+        );
+    }
+
+    /**
+     * @param mixed $input
+     * @param $stripWhitespaceOptionValue
+     * @param string|null $expectedOutput
+     * @param array $additionalOptions
+     * @dataProvider provideCoercesToStringUsingStripWhitespaceOptionData
+     */
+    public function testCoercesToStringUsingStripWhitespaceOption(
+        $input,
+        $stripWhitespaceOptionValue,
+        ?string $expectedOutput,
+        array $additionalOptions = []
+    ) {
+        self::assertEquals(
+            $expectedOutput,
+            Coerce::toString(
+                $input,
+                array_merge(
+                    $additionalOptions,
+                    [
+                        'stripWhitespace' => $stripWhitespaceOptionValue
                     ]
                 )
             )
