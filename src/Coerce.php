@@ -522,6 +522,12 @@ class Coerce
      * - **compactWhitespace**: Replace all whitespace characters in the resulting
      * `string` with a single space. This option accepts `true`
      * or `false`. **Default**: `false`.
+     * - **indicateTruncation**: Use in conjunction with option `$maxLength` to
+     * append a horizontal ellipsis to the resulting `string` in cases where
+     * coersion results in truncation. The 3-character ellipsis will be factored
+     * into the length of the resulting `string` so that max-length constraints
+     * are upheld. This option accepts `true`
+     * or `false`. **Default**: `false`.
      * - **maxLength**: Coerce to a `string` no greater than this
      * number of characters in length. If coersion results in a `string` greater
      * than this number of characters in length, truncate the resulting `string`.
@@ -590,7 +596,16 @@ class Coerce
             if (!is_null($options['maxLength'])
                 && 0 < $options['maxLength']
             ) {
-                $variable = substr($variable, 0, $options['maxLength']);
+                $append = '';
+
+                if (strlen($variable) > $options['maxLength']
+                    && $options['indicateTruncation']
+                ) {
+                    $variable = substr($variable, 0, $options['maxLength'] - 3);
+                    $append = '...';
+                } else {
+                    $variable = substr($variable, 0, $options['maxLength']);
+                }
 
                 if ($options['trimWhitespace']) {
                     /*
@@ -599,6 +614,8 @@ class Coerce
                      */
                     $variable = rtrim($variable);
                 }
+
+                $variable .= $append;
             }
         }
 
@@ -758,6 +775,7 @@ class Coerce
             [
                 'allowBlank' => true,
                 'compactWhitespace' => false,
+                'indicateTruncation' => false,
                 'maxLength' => null,
                 'stripWhitespace' => false,
                 'trimWhitespace' => false
@@ -766,6 +784,7 @@ class Coerce
 
         $resolver->setAllowedTypes('allowBlank', 'boolean');
         $resolver->setAllowedTypes('compactWhitespace', 'boolean');
+        $resolver->setAllowedTypes('indicateTruncation', 'boolean');
         $resolver->setAllowedTypes('maxLength', ['null', 'int']);
         $resolver->setAllowedTypes('stripWhitespace', 'boolean');
         $resolver->setAllowedTypes('trimWhitespace', 'boolean');

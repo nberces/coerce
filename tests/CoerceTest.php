@@ -592,6 +592,18 @@ class CoerceTest extends TestCase
         ];
     }
 
+    public function provideCoercesToStringUsingIndicateTruncationOptionData()
+    {
+        return [
+            ['Hello, World!', false, 'Hello, World!', ['maxLength' => 50]],
+            ['Hello, World!', true, 'Hello, World!', ['maxLength' => 50]],
+            ['Hello, World!', false, 'Hello, Wor', ['maxLength' => 10]],
+            ['Hello, World!', true, 'Hello, ...', ['maxLength' => 10]],
+            ['Hello, World!', false, 'Hello,', ['maxLength' => 7, 'trimWhitespace' => true]],
+            ['Hello, World!', true, 'Hello,...', ['maxLength' => 10, 'trimWhitespace' => true]]
+        ];
+    }
+
     public function provideCoercesToStringUsingMaxLengthOptionData()
     {
         return [
@@ -1068,6 +1080,33 @@ class CoerceTest extends TestCase
                     $additionalOptions,
                     [
                         'compactWhitespace' => $compactWhitespaceOptionValue
+                    ]
+                )
+            )
+        );
+    }
+
+    /**
+     * @param mixed $input
+     * @param $stripWhitespaceOptionValue
+     * @param string|null $expectedOutput
+     * @param array $additionalOptions
+     * @dataProvider provideCoercesToStringUsingIndicateTruncationOptionData
+     */
+    public function testCoercesToStringUsingIndicateTruncationOption(
+        $input,
+        $indicateTruncationOptionValue,
+        ?string $expectedOutput,
+        array $additionalOptions = []
+    ) {
+        self::assertEquals(
+            $expectedOutput,
+            Coerce::toString(
+                $input,
+                array_merge(
+                    $additionalOptions,
+                    [
+                        'indicateTruncation' => $indicateTruncationOptionValue
                     ]
                 )
             )
