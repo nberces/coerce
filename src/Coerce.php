@@ -273,7 +273,7 @@ class Coerce
             [
                 'default' => '',
                 'maxLength' => 320,
-                'trimWhitespace' => true
+                'trimWhitespace' => true,
             ]
         );
 
@@ -499,7 +499,7 @@ class Coerce
                 'compactWhitespace' => $options['compactWhitespace'],
                 'default' => $options['default'],
                 'maxLength' => $options['maxLength'],
-                'trimWhitespace' => true
+                'trimWhitespace' => true,
             ]
         );
     }
@@ -644,7 +644,7 @@ class Coerce
     ) {
         $resolver->setDefaults(
             [
-                'default' => null
+                'default' => null,
             ]
         );
     }
@@ -677,7 +677,7 @@ class Coerce
         $resolver->setDefaults(
             [
                 'immutable' => null,
-                'tz' => null
+                'tz' => null,
             ]
         );
 
@@ -725,7 +725,7 @@ class Coerce
             [
                 'allowZero' => true,
                 'noGreaterThan' => null,
-                'noLessThan' => null
+                'noLessThan' => null,
             ]
         );
 
@@ -750,7 +750,7 @@ class Coerce
             [
                 'allowBlank' => true,
                 'compactWhitespace' => false,
-                'maxLength' => null
+                'maxLength' => null,
             ]
         );
 
@@ -778,7 +778,7 @@ class Coerce
                 'indicateTruncation' => false,
                 'maxLength' => null,
                 'stripWhitespace' => false,
-                'trimWhitespace' => false
+                'trimWhitespace' => false,
             ]
         );
 

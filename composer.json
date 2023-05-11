@@ -1,34 +1,33 @@
 {
-  "name": "nberces/coerce",
-  "type": "library",
-  "description": "A utility class that straddles the line between validation and sanitization.",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Nicolas Berces",
-      "email": "hello@nberces.dev"
+    "name": "nberces/coerce",
+    "type": "library",
+    "description": "A utility class that straddles the line between validation and sanitization.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nicolas Berces"
+        }
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "require": {
+        "php": ">=7.1",
+        "symfony/options-resolver": "^4.0|^5.0|^6.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "phpunit/phpunit": "^9.0",
+        "squizlabs/php_codesniffer": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "NBerces\\Coerce\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NBerces\\CoerceTests\\": "tests/"
+        }
     }
-  ],
-  "config": {
-    "sort-packages": true
-  },
-  "require": {
-    "php": ">=7.1",
-    "symfony/options-resolver": "^4.0|^5.0"
-  },
-  "require-dev": {
-    "friendsofphp/php-cs-fixer": "^3.0",
-    "phpunit/phpunit": "^9.0",
-    "squizlabs/php_codesniffer": "dev-master"
-  },
-  "autoload": {
-    "psr-4": {
-      "NBerces\\Coerce\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "NBerces\\CoerceTests\\": "tests/"
-    }
-  }
 }

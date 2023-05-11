@@ -35,7 +35,7 @@ class CoerceTest extends TestCase
             ['NO', false],
             ['   0', false],
             ['no   ', false],
-            ['   No   ', false]
+            ['   No   ', false],
         ];
     }
 
@@ -52,7 +52,7 @@ class CoerceTest extends TestCase
              */
             [
                 new DateTime('1978-10-01 06:30:00'),
-                new DateTime('1978-10-01 06:30:00', $expectedTZ)
+                new DateTime('1978-10-01 06:30:00', $expectedTZ),
             ],
             /*
              * An instance of `DateTimeImmutable` as input is coerced into an instance of
@@ -60,7 +60,7 @@ class CoerceTest extends TestCase
              */
             [
                 new DateTimeImmutable('1978-10-01 06:30:00'),
-                new DateTimeImmutable('1978-10-01 06:30:00', $expectedTZ)
+                new DateTimeImmutable('1978-10-01 06:30:00', $expectedTZ),
             ],
             /*
              * A string-based date/time as input is coerced into an instance of
@@ -68,7 +68,7 @@ class CoerceTest extends TestCase
              */
             [
                 '1978-10-01 06:30:00',
-                new DateTime('1978-10-01 06:30:00', $expectedTZ)
+                new DateTime('1978-10-01 06:30:00', $expectedTZ),
             ],
             /*
              * A string-based date/time with leading/trailing whitespace as input
@@ -76,7 +76,7 @@ class CoerceTest extends TestCase
              */
             [
                 '   1978-10-01 06:30:00',
-                new DateTime('1978-10-01 06:30:00', $expectedTZ)
+                new DateTime('1978-10-01 06:30:00', $expectedTZ),
             ],
             /*
              * A string-based date/time with leading/trailing whitespace as input
@@ -84,7 +84,7 @@ class CoerceTest extends TestCase
              */
             [
                 '1978-10-01 06:30:00   ',
-                new DateTime('1978-10-01 06:30:00', $expectedTZ)
+                new DateTime('1978-10-01 06:30:00', $expectedTZ),
             ],
             /*
              * A string-based date/time with leading/trailing whitespace as input
@@ -92,7 +92,7 @@ class CoerceTest extends TestCase
              */
             [
                 '   1978-10-01 06:30:00    ',
-                new DateTime('1978-10-01 06:30:00', $expectedTZ)
+                new DateTime('1978-10-01 06:30:00', $expectedTZ),
             ],
             /*
              * An array-based date/time using integers as input is coerced into an instance of
@@ -104,9 +104,9 @@ class CoerceTest extends TestCase
                     'month' => 10,
                     'year' => 1978,
                     'hour' => 6,
-                    'minute' => 30
+                    'minute' => 30,
                 ],
-                new DateTime('1978-10-01 06:30:00', $expectedTZ)
+                new DateTime('1978-10-01 06:30:00', $expectedTZ),
             ],
             /*
              * An array-based date/time using strings as input is coerced into an instance of
@@ -118,9 +118,9 @@ class CoerceTest extends TestCase
                     'month' => '10  ',
                     'year' => '   1978',
                     'hour' => '  6  ',
-                    'minute' => '30'
+                    'minute' => '30',
                 ],
-                new DateTime('1978-10-01 06:30:00', $expectedTZ)
+                new DateTime('1978-10-01 06:30:00', $expectedTZ),
             ],
             /*
              * An array-based date/time with `minute` missing as input is
@@ -131,9 +131,9 @@ class CoerceTest extends TestCase
                     'day' => 1,
                     'month' => 10,
                     'year' => 1978,
-                    'hour' => 6
+                    'hour' => 6,
                 ],
-                new DateTime('1978-10-01 06:00:00', $expectedTZ)
+                new DateTime('1978-10-01 06:00:00', $expectedTZ),
             ],
             /*
              * An array-based date/time with `hour` missing as input is
@@ -144,9 +144,9 @@ class CoerceTest extends TestCase
                     'day' => 1,
                     'month' => 10,
                     'year' => 1978,
-                    'minute' => 30
+                    'minute' => 30,
                 ],
-                new DateTime('1978-10-01 00:30:00', $expectedTZ)
+                new DateTime('1978-10-01 00:30:00', $expectedTZ),
             ],
             /*
              * An array-based date/time with `hour` and `minute` missing as input
@@ -156,9 +156,9 @@ class CoerceTest extends TestCase
                 [
                     'day' => 1,
                     'month' => 10,
-                    'year' => 1978
+                    'year' => 1978,
                 ],
-                new DateTime('1978-10-01 00:00:00', $expectedTZ)
+                new DateTime('1978-10-01 00:00:00', $expectedTZ),
             ],
             /*
              * An array-based date/time with an invalid `hour` is coerced into an instance of
@@ -170,9 +170,9 @@ class CoerceTest extends TestCase
                     'month' => 10,
                     'year' => 1978,
                     'hour' => -10,
-                    'minute' => 30
+                    'minute' => 30,
                 ],
-                new DateTime('1978-10-01 00:30:00', $expectedTZ)
+                new DateTime('1978-10-01 00:30:00', $expectedTZ),
             ],
             /*
              * An array-based date/time with an invalid `hour` is coerced into an instance of
@@ -184,9 +184,9 @@ class CoerceTest extends TestCase
                     'month' => 10,
                     'year' => 1978,
                     'hour' => 24,
-                    'minute' => 30
+                    'minute' => 30,
                 ],
-                new DateTime('1978-10-01 23:30:00', $expectedTZ)
+                new DateTime('1978-10-01 23:30:00', $expectedTZ),
             ],
             /*
              * An array-based date/time with an invalid `minute` is coerced into an instance of
@@ -198,9 +198,9 @@ class CoerceTest extends TestCase
                     'month' => 10,
                     'year' => 1978,
                     'hour' => 6,
-                    'minute' => -30
+                    'minute' => -30,
                 ],
-                new DateTime('1978-10-01 06:00:00', $expectedTZ)
+                new DateTime('1978-10-01 06:00:00', $expectedTZ),
             ],
             /*
              * An array-based date/time with an invalid `minute` is coerced into an instance of
@@ -212,10 +212,10 @@ class CoerceTest extends TestCase
                     'month' => 10,
                     'year' => 1978,
                     'hour' => 6,
-                    'minute' => 78
+                    'minute' => 78,
                 ],
-                new DateTime('1978-10-01 06:59:00', $expectedTZ)
-            ]
+                new DateTime('1978-10-01 06:59:00', $expectedTZ),
+            ],
         ];
     }
 
@@ -229,7 +229,7 @@ class CoerceTest extends TestCase
             [
                 new DateTime('1978-10-01 06:30:00'),
                 null,
-                new DateTime('1978-10-01 06:30:00')
+                new DateTime('1978-10-01 06:30:00'),
             ],
             /*
              * An instance of `DateTime` as input with `false` as the `immutable`
@@ -238,7 +238,7 @@ class CoerceTest extends TestCase
             [
                 new DateTime('1978-10-01 06:30:00'),
                 false,
-                new DateTime('1978-10-01 06:30:00')
+                new DateTime('1978-10-01 06:30:00'),
             ],
             /*
              * An instance of `DateTime` as input with `true` as the `immutable`
@@ -247,7 +247,7 @@ class CoerceTest extends TestCase
             [
                 new DateTime('1978-10-01 06:30:00'),
                 true,
-                new DateTimeImmutable('1978-10-01 06:30:00')
+                new DateTimeImmutable('1978-10-01 06:30:00'),
             ],
             /*
              * An instance of `DateTimeImmutable` as input with `NULL` as the `immutable`
@@ -256,7 +256,7 @@ class CoerceTest extends TestCase
             [
                 new DateTimeImmutable('1978-10-01 06:30:00'),
                 null,
-                new DateTimeImmutable('1978-10-01 06:30:00')
+                new DateTimeImmutable('1978-10-01 06:30:00'),
             ],
             /*
              * An instance of `DateTimeImmutable` as input with `false` as the `immutable`
@@ -265,7 +265,7 @@ class CoerceTest extends TestCase
             [
                 new DateTimeImmutable('1978-10-01 06:30:00'),
                 false,
-                new DateTime('1978-10-01 06:30:00')
+                new DateTime('1978-10-01 06:30:00'),
             ],
             /*
              * An instance of `DateTimeImmutable` as input with `true` as the `immutable`
@@ -274,7 +274,7 @@ class CoerceTest extends TestCase
             [
                 new DateTimeImmutable('1978-10-01 06:30:00'),
                 true,
-                new DateTimeImmutable('1978-10-01 06:30:00')
+                new DateTimeImmutable('1978-10-01 06:30:00'),
             ],
             /*
              * A string-based date/time as input with `NULL` as the `immutable`
@@ -283,7 +283,7 @@ class CoerceTest extends TestCase
             [
                 '1978-10-01 06:30:00',
                 null,
-                new DateTime('1978-10-01 06:30:00')
+                new DateTime('1978-10-01 06:30:00'),
             ],
             /*
              * A string-based date/time as input with `false` as the `immutable`
@@ -292,7 +292,7 @@ class CoerceTest extends TestCase
             [
                 '1978-10-01 06:30:00',
                 false,
-                new DateTime('1978-10-01 06:30:00')
+                new DateTime('1978-10-01 06:30:00'),
             ],
             /*
              * A string-based date/time as input with `true` as the `immutable`
@@ -301,7 +301,7 @@ class CoerceTest extends TestCase
             [
                 '1978-10-01 06:30:00',
                 true,
-                new DateTimeImmutable('1978-10-01 06:30:00')
+                new DateTimeImmutable('1978-10-01 06:30:00'),
             ],
             /*
              * An array-based date/time as input with `NULL` as the `immutable`
@@ -311,10 +311,10 @@ class CoerceTest extends TestCase
                 [
                     'day' => 1,
                     'month' => 10,
-                    'year' => 1978
+                    'year' => 1978,
                 ],
                 null,
-                new DateTime('1978-10-01 00:00:00')
+                new DateTime('1978-10-01 00:00:00'),
             ],
             /*
              * An array-based date/time as input with `false` as the `immutable`
@@ -324,10 +324,10 @@ class CoerceTest extends TestCase
                 [
                     'day' => 1,
                     'month' => 10,
-                    'year' => 1978
+                    'year' => 1978,
                 ],
                 false,
-                new DateTime('1978-10-01 00:00:00')
+                new DateTime('1978-10-01 00:00:00'),
             ],
             /*
              * An array-based date/time as input with `true` as the `immutable`
@@ -337,11 +337,11 @@ class CoerceTest extends TestCase
                 [
                     'day' => 1,
                     'month' => 10,
-                    'year' => 1978
+                    'year' => 1978,
                 ],
                 true,
-                new DateTimeImmutable('1978-10-01 00:00:00')
-            ]
+                new DateTimeImmutable('1978-10-01 00:00:00'),
+            ],
         ];
     }
 
@@ -365,7 +365,7 @@ class CoerceTest extends TestCase
             [
                 $dttmString,
                 $southPoleTZString,
-                new DateTime($dttmString, $southPoleTZ)
+                new DateTime($dttmString, $southPoleTZ),
             ],
             /*
              * A string-based date/time as input with `NULL` as the `tz` option
@@ -375,7 +375,7 @@ class CoerceTest extends TestCase
             [
                 $dttmString,
                 null,
-                new DateTime($dttmString, $defaultTZ)
+                new DateTime($dttmString, $defaultTZ),
             ],
             /*
              * An instance of `DateTime` as input with a string-based timezone
@@ -385,7 +385,7 @@ class CoerceTest extends TestCase
             [
                 new DateTime($dttmString, $defaultTZ),
                 $southPoleTZString,
-                new DateTime($dttmString, $southPoleTZ)
+                new DateTime($dttmString, $southPoleTZ),
             ],
             /*
              * A string-based date/time in a format that explicitly identifies
@@ -397,7 +397,7 @@ class CoerceTest extends TestCase
             [
                 $southPoleDttmString,
                 $defaultTZString,
-                new DateTime($dttmString, $southPoleTZ)
+                new DateTime($dttmString, $southPoleTZ),
             ],
             /*
              * An instance of `DateTime` as input with `NULL` as the `tz` option
@@ -407,8 +407,8 @@ class CoerceTest extends TestCase
             [
                 new DateTime($dttmString, $southPoleTZ),
                 null,
-                new DateTime($dttmString, $southPoleTZ)
-            ]
+                new DateTime($dttmString, $southPoleTZ),
+            ],
         ];
     }
 
@@ -418,7 +418,7 @@ class CoerceTest extends TestCase
             ['test@test.com', 'test@test.com'],
             ['   test@test.com', 'test@test.com'],
             ['test@test.com  ', 'test@test.com'],
-            ['  test@test.com   ', 'test@test.com']
+            ['  test@test.com   ', 'test@test.com'],
         ];
     }
 
@@ -435,7 +435,7 @@ class CoerceTest extends TestCase
             ['-17.54', -17.54],
             ['  92', 92.0],
             ['873.432  ', 873.432],
-            ['  -17.54  ', -17.54]
+            ['  -17.54  ', -17.54],
         ];
     }
 
@@ -452,7 +452,7 @@ class CoerceTest extends TestCase
             ['-17.54', -17.0, -17.54],
             ['  92', 93, 92.0],
             ['873.432  ', 873.5, 873.432],
-            ['  -17.54  ', -18, -18.0]
+            ['  -17.54  ', -18, -18.0],
         ];
     }
 
@@ -469,7 +469,7 @@ class CoerceTest extends TestCase
             ['-17.54', -17.0, -17.0],
             ['  92', 91, 92.0],
             ['873.432  ', 873.5, 873.5],
-            ['  -17.54  ', -18, -17.54]
+            ['  -17.54  ', -18, -17.54],
         ];
     }
 
@@ -486,7 +486,7 @@ class CoerceTest extends TestCase
             ['-17.54', -17],
             ['  92', 92],
             ['873.432  ', 873],
-            ['  -17.54  ', -17]
+            ['  -17.54  ', -17],
         ];
     }
 
@@ -503,7 +503,7 @@ class CoerceTest extends TestCase
             ['-17.54', -17.0, -17],
             ['  92', 93, 92],
             ['873.432  ', 873.5, 873],
-            ['  -17.54  ', -18, -18]
+            ['  -17.54  ', -18, -18],
         ];
     }
 
@@ -520,7 +520,7 @@ class CoerceTest extends TestCase
             ['-17.54', -17.0, -17],
             ['  92', 91, 92],
             ['873.432  ', 873.5, 873],
-            ['  -17.54  ', -18, -17]
+            ['  -17.54  ', -18, -17],
         ];
     }
 
@@ -529,28 +529,28 @@ class CoerceTest extends TestCase
         return [
             [
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             ],
             [
                 '   Lorem ipsum dolor sit amet, consectetur adipiscing elit.  ',
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             ],
             [
                 '  <p>Lorem ipsum &nbsp; dolor sit amet,  </p><p><i>consectetur</i>&nbsp;adipiscing elit. ',
-                "Lorem ipsum dolor sit amet,\n\nconsectetur adipiscing elit."
+                "Lorem ipsum dolor sit amet,\n\nconsectetur adipiscing elit.",
             ],
             [
                 "<p>Lorem ipsum dolor sit amet.</p><p></p><p></p><p>Consectetur adipiscing elit.</p>",
-                "Lorem ipsum dolor sit amet.\n\nConsectetur adipiscing elit."
+                "Lorem ipsum dolor sit amet.\n\nConsectetur adipiscing elit.",
             ],
             [
                 "<p>Lorem ipsum dolor sit amet.</p><p></p><p></p><p>\n \n \n \n\n <p>Consectetur adipiscing elit.</p>",
-                "Lorem ipsum dolor sit amet.\n\nConsectetur adipiscing elit."
+                "Lorem ipsum dolor sit amet.\n\nConsectetur adipiscing elit.",
             ],
             [
                 "\n \n \n<h1>Hello\n \n \n<p>World!</p>",
-                'Hello World!'
-            ]
+                'Hello World!',
+            ],
         ];
     }
 
@@ -563,12 +563,12 @@ class CoerceTest extends TestCase
             [-32.114, '-32.114'],
             [
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             ],
             [
                 '   Lorem ipsum dolor sit amet, consectetur adipiscing elit.  ',
-                '   Lorem ipsum dolor sit amet, consectetur adipiscing elit.  '
-            ]
+                '   Lorem ipsum dolor sit amet, consectetur adipiscing elit.  ',
+            ],
         ];
     }
 
@@ -587,8 +587,8 @@ class CoerceTest extends TestCase
             [
                 ' Lorem ipsum dolor  sit amet, consectetur adipiscing elit. ',
                 true,
-                ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-            ]
+                ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+            ],
         ];
     }
 
@@ -600,7 +600,7 @@ class CoerceTest extends TestCase
             ['Hello, World!', false, 'Hello, Wor', ['maxLength' => 10]],
             ['Hello, World!', true, 'Hello, ...', ['maxLength' => 10]],
             ['Hello, World!', false, 'Hello,', ['maxLength' => 7, 'trimWhitespace' => true]],
-            ['Hello, World!', true, 'Hello,...', ['maxLength' => 10, 'trimWhitespace' => true]]
+            ['Hello, World!', true, 'Hello,...', ['maxLength' => 10, 'trimWhitespace' => true]],
         ];
     }
 
@@ -622,7 +622,7 @@ class CoerceTest extends TestCase
             ['  foo', 2, null, ['allowBlank' => false]],
             ['  f  o o ', 6, ' f o o', ['compactWhitespace' => true]],
             ['  foo', 2, 'fo', ['trimWhitespace' => true]],
-            ['  f  o o  ', 4, 'f o', ['compactWhitespace' => true, 'trimWhitespace' => true]]
+            ['  f  o o  ', 4, 'f o', ['compactWhitespace' => true, 'trimWhitespace' => true]],
         ];
     }
 
@@ -641,8 +641,8 @@ class CoerceTest extends TestCase
             [
                 ' Lorem ipsum dolor  sit amet, consectetur adipiscing elit. ',
                 true,
-                'Loremipsumdolorsitamet,consecteturadipiscingelit.'
-            ]
+                'Loremipsumdolorsitamet,consecteturadipiscingelit.',
+            ],
         ];
     }
 
@@ -659,7 +659,7 @@ class CoerceTest extends TestCase
             [-34, ['default' => false], false],
             ['10', ['default' => 7736], 7736],
             [[1, 2, 3], ['default' => $now], $now],
-            [[1, 2, 3], ['default' => ['a', 'b', 'c']], ['a', 'b', 'c']]
+            [[1, 2, 3], ['default' => ['a', 'b', 'c']], ['a', 'b', 'c']],
         ];
     }
 
@@ -672,28 +672,28 @@ class CoerceTest extends TestCase
                 [
                     'day' => 1,
                     'month' => 10,
-                    'yearX' => 1978
+                    'yearX' => 1978,
                 ],
                 [],
-                null
+                null,
             ],
             [
                 [
                     'day' => 1,
                     'monthX' => 10,
-                    'year' => 1978
+                    'year' => 1978,
                 ],
                 [],
-                null
+                null,
             ],
             [
                 [
                     'dayX' => 1,
                     'month' => 10,
-                    'year' => 1978
+                    'year' => 1978,
                 ],
                 [],
-                null
+                null,
             ],
             [
                 [
@@ -701,52 +701,52 @@ class CoerceTest extends TestCase
                     'month' => 10,
                 ],
                 [],
-                null
+                null,
             ],
             [
                 [
                     'day' => 1,
-                    'year' => 1978
+                    'year' => 1978,
                 ],
                 [],
-                null
+                null,
             ],
             [
                 [
                     'month' => 10,
-                    'year' => 1978
+                    'year' => 1978,
                 ],
                 [],
-                null
+                null,
             ],
             [
                 [
                     'day' => 14,
                     'month' => 13,
-                    'year' => 1978
+                    'year' => 1978,
                 ],
                 [],
-                null
+                null,
             ],
             ['foo', ['default' => true], true],
             [(object)[], ['default' => 'Hello, World!'], 'Hello, World!'],
             [
                 [
                     'day' => 1,
-                    'month' => 10
+                    'month' => 10,
                 ],
                 ['default' => 1234],
-                1234
+                1234,
             ],
             [
                 [
-                    'day' => 1
+                    'day' => 1,
                 ],
                 [
-                    'default' => [1, 2, 3]
+                    'default' => [1, 2, 3],
                 ],
-                [1, 2, 3]
-            ]
+                [1, 2, 3],
+            ],
         ];
     }
 
@@ -760,7 +760,7 @@ class CoerceTest extends TestCase
             [true, ['default' => false], false],
             ['10', ['default' => 7736], 7736],
             [[1, 2, 3], ['default' => $now], $now],
-            [[1, 2, 3], ['default' => ['a', 'b', 'c']], ['a', 'b', 'c']]
+            [[1, 2, 3], ['default' => ['a', 'b', 'c']], ['a', 'b', 'c']],
         ];
     }
 
@@ -786,7 +786,7 @@ class CoerceTest extends TestCase
             [[1, 2, 3], ['default' => $now], $now],
             [[1, 2, 3], ['default' => ['a', 'b', 'c']], ['a', 'b', 'c']],
             [34.0, ['allowZero' => false, 'noGreaterThan' => 0], null],
-            [-34.0, ['allowZero' => false, 'noLessThan' => 0], null]
+            [-34.0, ['allowZero' => false, 'noLessThan' => 0], null],
         ];
     }
 
@@ -810,7 +810,7 @@ class CoerceTest extends TestCase
             [false, ['default' => true], true],
             ['x10', ['default' => 7736], 7736],
             [[1, 2, 3], ['default' => $now], $now],
-            [[1, 2, 3], ['default' => ['a', 'b', 'c']], ['a', 'b', 'c']]
+            [[1, 2, 3], ['default' => ['a', 'b', 'c']], ['a', 'b', 'c']],
         ];
     }
 
@@ -835,7 +835,7 @@ class CoerceTest extends TestCase
             [false, ['default' => true], true],
             [$now, ['default' => 7736], 7736],
             [[1, 2, 3], ['default' => $now], $now],
-            [[1, 2, 3], ['default' => ['a', 'b', 'c']], ['a', 'b', 'c']]
+            [[1, 2, 3], ['default' => ['a', 'b', 'c']], ['a', 'b', 'c']],
         ];
     }
 
@@ -1079,7 +1079,7 @@ class CoerceTest extends TestCase
                 array_merge(
                     $additionalOptions,
                     [
-                        'compactWhitespace' => $compactWhitespaceOptionValue
+                        'compactWhitespace' => $compactWhitespaceOptionValue,
                     ]
                 )
             )
@@ -1106,7 +1106,7 @@ class CoerceTest extends TestCase
                 array_merge(
                     $additionalOptions,
                     [
-                        'indicateTruncation' => $indicateTruncationOptionValue
+                        'indicateTruncation' => $indicateTruncationOptionValue,
                     ]
                 )
             )
@@ -1133,7 +1133,7 @@ class CoerceTest extends TestCase
                 array_merge(
                     $additionalOptions,
                     [
-                        'maxLength' => $maxLengthOptionValue
+                        'maxLength' => $maxLengthOptionValue,
                     ]
                 )
             )
@@ -1160,7 +1160,7 @@ class CoerceTest extends TestCase
                 array_merge(
                     $additionalOptions,
                     [
-                        'stripWhitespace' => $stripWhitespaceOptionValue
+                        'stripWhitespace' => $stripWhitespaceOptionValue,
                     ]
                 )
             )
