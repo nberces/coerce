@@ -598,13 +598,13 @@ class Coerce
             ) {
                 $append = '';
 
-                if (strlen($variable) > $options['maxLength']
+                if (mb_strlen($variable) > $options['maxLength']
                     && $options['indicateTruncation']
                 ) {
-                    $variable = substr($variable, 0, $options['maxLength'] - 3);
+                    $variable = mb_substr($variable, 0, $options['maxLength'] - 3);
                     $append = '...';
                 } else {
-                    $variable = substr($variable, 0, $options['maxLength']);
+                    $variable = mb_substr($variable, 0, $options['maxLength']);
                 }
 
                 if ($options['trimWhitespace']) {
@@ -622,7 +622,7 @@ class Coerce
         if (!$options['allowBlank']
             &&
             (
-                0 === strlen($variable)
+                0 === mb_strlen($variable)
                 || ctype_space($variable)
             )
         ) {
